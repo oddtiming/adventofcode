@@ -1,0 +1,6 @@
+[submodule "libft"]
+	path = libft
+	url = https://github.com/oddtiming/libft
+[submodule "get_next_line"]
+	path = get_next_line
+	url = https://github.com/oddtiming/get_next_line
