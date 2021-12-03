@@ -1,3 +1,5 @@
+//code copied from https://github.com/undnull/aoc/blob/2021/03-diagnostic/task2.c
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
