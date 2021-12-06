@@ -1,5 +1,5 @@
-#include "../../get_next_line/get_next_line.h"
-#include "../../libft/libft.h"
+#include "../get_next_line/get_next_line.h"
+#include "../libft/libft.h"
 #include <stdio.h>
 
 char	**fd_to_array(int fd)
@@ -52,7 +52,7 @@ char	get_most_common(char **split_array, int index, int *count)
 			*count+=1;
 		total++;
 	}
-	if (*count > (total/2))
+	if (*count * *count> total)
 		return ('1');
 	else if (*count == (total/2))
 		return ('e');
@@ -73,8 +73,9 @@ char	get_least_common(char **split_array, int index, int *count)
 			*count+=1;
 		total++;
 	}
-	if (*count > (total/2))
+	if (*count * *count> total)
 	{
+		printf("count = %d\n", *count);
 		*count = total - *count;
 		return ('0');
 	}
