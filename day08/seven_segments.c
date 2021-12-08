@@ -48,3 +48,20 @@ int	main(void)
 	printf("# of 8s = %d\n", digits_count[8]);
 	printf("sum = %d\n", digits_count[1] + digits_count[4] + digits_count [7] + digits_count[8]);
 }
+
+/*
+	Todo: build solver
+		- create possible outcomes (5 letters = {2, 3, 5} && 6 letters = {0, 6, 9})
+		- solve for differences 
+		e.g.	if (size(letter_set[i]) == 5 ** 2 elements of letter_set[i] are not part of letter_set[i + 1])
+			 		letter_set[i] = 2 || 5);
+				if (size(letter_set[i]) == 5 && 1 element of letter_set[i] is not part of letter_set[i + 2])
+				{
+					letter_set[i] = 2;
+					letter_set[i + 2] = 3;
+					letter_ser[i + 1] = 5;
+					break;
+				}
+				etc.
+
+*/
