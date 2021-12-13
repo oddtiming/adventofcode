@@ -39,6 +39,11 @@ char	*get_next_word(const char *str, const char *sep)
 	int			word_len;
 	char		*next_word;
 
+	if (!str)
+	{
+		i = 0;
+		return (NULL);
+	}
 	word_len = 0;
 	while (str[i] && !is_set(str[i], sep))
 	{
@@ -74,6 +79,7 @@ char	**parse_line(char *curr_line)
 		input_digits[i] = get_next_word(curr_line, " ");
 		i++;
 	}
+	get_next_word(NULL, "");
 	input_digits[i] = NULL;
 	return (input_digits);
 }
@@ -328,8 +334,6 @@ int	solve_line(char **char_inputs, char *curr_line, int *int_values)
 			word_len++;
 		}
 		curr_digit = get_digit(curr_line + i - word_len, word_len, char_inputs);
-		printf("for multiplier = %d, digit = %d\n", multiplier, curr_digit);
-		printf("int_values[digit] = %d\n", int_values[curr_digit]);
 		result += multiplier * int_values[curr_digit];
 		multiplier /= 10;
 		while (!isalpha(curr_line[i]))
@@ -340,37 +344,32 @@ int	solve_line(char **char_inputs, char *curr_line, int *int_values)
 
 int	main(void)
 {
-	int		fd, i;
-	int		curr_number;
+	int		fd;
+	int		total_result, curr_result;
 	char	*curr_line;
 	char	**char_inputs;
 	int		*int_values;
 
 	fd = open("input.txt", O_RDONLY);
 	curr_line = get_next_line(fd);
+	total_result = 0;
 	int_values = malloc(10 * sizeof(int));
-	for (i = 0; i < 10; i++)
-		int_values[i] = 0;
-	// while (curr_line)
-	// {
+	while (curr_line)
+	{
 		char_inputs = parse_line(curr_line);
+		printf("%s", curr_line);
+		for (int i = 0; i < 10; i++)
+			printf("%s\n", char_inputs[i]);
 		decipher_inputs(char_inputs, &int_values);
-	printf("curr_line = %s", curr_line);
-	for (i = 0; i < 10; i++)
-		printf("int_values[%d] = %d\n", i, int_values[i]);
-	for (i = 0; i < 10; i++)
-		printf("int_values[%d] = %d\n", i, int_values[i]);
-
-	printf("Sol is %d\n", solve_line(char_inputs, curr_line, int_values));
-
-	for (i = 0; i < 10; i++)
-		printf("int_values[%d] = %d\n", i, int_values[i]);
-	// curr_number = solve_line(char_inputs, curr_line, int_values);
-	
-	free(curr_line);
-		// curr_line = get_next_line(fd);
-	// }
+		curr_result = solve_line(char_inputs, curr_line, int_values);
+		printf("%s = %d\n", curr_line, curr_result);
+		total_result += curr_result;
+		free(curr_line);
+		curr_line = get_next_line(fd);
+	}
 	close(fd);
+	printf("Total = %d\n", total_result);
+	
 	// for (i = 0; char_inputs[i]; i++)
 	// 	printf("line #%d: %s\n", i, char_inputs[i]);
 	// free_array(char_inputs);

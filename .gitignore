@@ -1,4 +1,5 @@
 .DS*
 *.out
 *.o
-
+*.dSYM
+.vscode
